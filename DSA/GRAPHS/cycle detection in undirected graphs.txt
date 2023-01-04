@@ -1,0 +1,55 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+
+bool cycleIs(int src,vector<vector<int>> &t,vector<bool> &z,int parent)
+{   int o;
+    z[src] = true ; 
+    for(auto o: t[src])
+    {
+        if(o!=parent)
+        {
+            if(z[o])
+            {
+                return true;
+            }
+            if(!z[o] && cycleIs(o,t,z,src))
+            {
+                return true;
+            }
+        }
+    }
+    return false;
+    
+}
+int main()
+{ int V,E,n,m,i;
+vector<vector<int>> t(50);
+vector<bool> z(50,false);
+  bool cycle = false;
+cin>>V>>E;
+
+for(i=0;i<E;i++)
+{
+    cin>>n>>m;
+    t[n].push_back(m);
+    t[m].push_back(n);
+    
+}
+
+i=0;
+while(i<n)
+{
+    if(!z[i] && cycleIs(i,t,z,-1))
+    {
+        cycle = true;
+    }
+    i++;
+}
+   if(cycle == true)
+   cout<<"CYCLE PRESENT";
+   else
+   cout<<" NO CYCLES PRESENT";
+    return 0;
+}

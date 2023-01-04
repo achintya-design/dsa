@@ -1,0 +1,64 @@
+#include <bits/stdc++.h>
+#define vi vector<int>
+#define vvi vector<vi>
+#define pii pair<int,int>
+#define vii vector<pii>
+#define Rep(i,a,b) for(int i=a;i<b;i++)
+#define ff first
+#define ss second
+#define setBits(x) builtin_popcount(x)
+
+
+
+using namespace std;
+
+vi adj[100];
+
+int main()
+{
+   int n,m,i,j;
+   cout<<"ENTER NO OF NODES:";
+   cin>>n;
+   cout<<"ENTER NO OF EDGES:";
+   cin>>m;
+   
+   vvi adjm(n+1,vi(n+1,0));
+   
+   Rep(i,0,m)
+   
+   {
+       int x,y;
+       cin>>x>>y;
+       
+       adjm[x][y]=1;
+       adjm[y][x]=1;
+       
+   }
+   cout<<"THE ADJACENCY MATRIX IS "<<endl;
+   Rep(i,0,n)
+   {
+       Rep(j,0,n)
+       {
+           cout<<adjm[i][j]<<" ";
+       }
+       cout<<endl;
+   }
+   Rep(i,0,m)
+   {
+       int x,y;
+       cin>>x>>y;
+       adj[x].push_back(y);
+       adj[y].push_back(x);
+   }
+   cout<<"THE ADJACENCY LIST IS \n";
+   Rep(i,0,n)
+   {
+       cout<<i<<"-->";
+       for(int x: adj[i])
+       {
+           cout<<x<<" ";
+       }
+       cout<<endl;
+   }
+   return 0;
+}

@@ -1,0 +1,15 @@
+void quoi(Node* root,vector<int> &a)
+{
+    if(root)
+    {
+        quoi(root->left,a);
+        quoi(root->right,a);
+        a.push_back(root->data);
+    }
+}
+vector <int> postOrder(Node* root)
+{
+  vector<int> a;
+  quoi(root,a);
+  return a;
+}

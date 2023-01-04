@@ -1,0 +1,52 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+vector<vector<int>> adj;
+vector<bool> v;
+vector<int> comp;
+int get_comp(int idx)
+{   
+    if(v[idx])
+        return 0;
+        
+    v[idx]=true;
+    int c=1;
+    for(auto i : adj[idx])
+    {
+    if(!v[i])
+    {   
+        c += get_comp(i);
+        v[i]=true;
+    }
+    }
+    return c;
+    
+}
+int main()
+{
+    
+    
+    int V,E,i,n,m;
+    cin>>V>>E;
+    v = vector<bool> (V,0);
+    adj = vector<vector<int>> (V);
+    
+    for(i=0;i<E;i++)
+    {
+        cin>>n>>m;
+        adj[n].push_back(m);
+        adj[m].push_back(n);
+    }
+    
+    for(i=0;i<V;i++)
+{
+    if(!v[i])
+        {comp.push_back(get_comp(i));}
+}  
+cout<<"no of elements:";
+    for(auto i : comp)
+    {
+        cout<<i<<" ";
+    }
+    return 0;
+}

@@ -1,0 +1,57 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+bool CCycle(int src,vector<vector<int>> a,vector<bool> v,vector<bool> stack)
+{
+    stack[src] = true;
+    
+    if(!v[src])
+    {
+        v[src]=true;
+        for(auto i: a[src])
+        {
+            if(!v[i] && CCycle(i,a,v,stack))
+            {
+                return true;
+            }
+            if(stack[i])
+             return true;
+        }
+    }
+    stack[src] = false;
+    
+    return false ; 
+}
+
+
+
+
+int main()
+{
+    int n,m,V,E,i;
+    cin>>V>>E;
+    bool cycle ;
+    vector<vector<int>> a(V);
+    vector<bool> stack(V,0);
+    vector<bool> v(V,0);
+    
+    for(i=0;i<E;i++)
+    {
+        cin>>n>>m;
+        a[n].push_back(m);
+    }
+    
+    for(i=0;i<n;i++)
+    {
+        if(!v[i] && CCycle(i,a,v,stack))
+            {
+                cycle = true;
+            }
+    }
+    if (cycle == true)
+    cout<<"CYCLE PRESENT";
+    else
+    cout<<"CYCLE NOT PRESENT";
+    return 0;
+}

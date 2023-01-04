@@ -1,0 +1,63 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+
+vector<vector<int>> adj;
+vector<int> colour;
+vector<bool> vis;
+bool bipartite ;
+
+void checkcolour(int p,int cur)
+{ 
+    if(colour[p]!=-1 && colour[p]!=cur)
+    {
+        bipartite = false;
+        return ;
+        
+    }
+    colour[p] = cur ; 
+    if(vis[p])
+    {
+        return ;
+    }
+    vis[p] = true;
+    
+    for(auto i :adj[p])
+    {
+        checkcolour(i,cur xor 1);
+    }
+}
+
+
+int main()
+{   bipartite = true ;
+    int V,E,n,m,i;
+    
+    cin>>V>>E;
+    
+    vis = vector<bool> (V,0);
+    adj = vector<vector<int>> (V);
+    colour = vector<int> (V,-1);
+    
+    for(i=0;i<E;i++)
+    {
+        cin>>n>>m;
+        adj[n].push_back(m);
+        adj[m].push_back(n);
+        
+    }
+    for(i=0;i<V;i++)
+    {
+        if(!vis[i])
+        {
+            checkcolour(i,0);
+        }
+    }
+    if(bipartite)
+    cout<<"YES IT IS A BIPARTE GRAPH";
+    else
+    cout<<" NO IT ISN'T A BIPARTE GRAPH";
+     return 0;
+    
+}

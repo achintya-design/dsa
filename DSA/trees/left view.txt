@@ -1,0 +1,22 @@
+vector<int> leftView(Node *root)
+{ 
+    vector<int> a;
+    queue<Node*> q;
+    
+    if(root==NULL)
+    return a;
+    q.push(root)    ;      
+    while(!q.empty())
+    {   int s = q.size();
+        a.push_back(q.front()->data);
+        for(int i=0;i<s;i++){
+        Node* z = q.front();
+        q.pop();
+        
+        if(z->left!=NULL)
+        q.push(z->left);
+        if(z->right!=NULL)
+        q.push(z->right);}
+    }
+    return a;
+}

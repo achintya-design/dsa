@@ -1,0 +1,44 @@
+
+
+#include<bits/stdc++.h>
+
+using namespace std;
+bool sortbyfirst(const pair<int,int> &a,
+              const pair<int,int> &b)
+{
+    return (a.first > b.first);
+}
+int main()
+{
+    string t;
+    getline(cin, t);int i,k=26,s=0;
+    map<char,int>g;
+    for(i=0;t[i]!='\0';i++)
+    {
+        if((t[i]>='a'&&t[i]<='z')||(t[i]>='A'&&t[i]<='Z'))
+        {
+            t[i]=tolower(t[i]);
+            if (g.find(t[i]) == g.end())
+            {
+                g[t[i]]=1;
+            }
+            else
+            {
+                g[t[i]]+=1;
+            }
+        }
+    }
+    vector<pair<int,char>> h;
+    for(auto q :g)
+    {
+        h.push_back(make_pair(q.second,q.first));
+    }
+    
+    sort(h.begin(),h.end(),sortbyfirst);
+    for(auto d: h)
+    {
+        s+=k*(d.first);k--;
+    }
+    cout<<s;
+    return 0;
+}

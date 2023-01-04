@@ -1,0 +1,32 @@
+abcabcbb
+
+output:3
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        set<char> a;
+        int max=0;
+        int st=0,e=0;
+        while(st<s.size())
+        {
+        auto it=a.find(s[st]);
+            if(it==a.end())
+            {
+            if(st-e+1>max)
+            {max=st-e+1;}
+            a.insert(s[st]);
+            st++;
+            
+            }
+            else
+            {
+                a.erase(s[e]);
+                e++;
+                
+            }
+        }
+        
+        return(max);
+    }
+};
